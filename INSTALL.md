@@ -12,10 +12,10 @@ Los pasos a seguir una vez tenemos el servidor en marcha y nos hemos conectado p
     sudo su -
     ```
 
-2. Actualizaremos el servidor. Para ello ejecutaremos los siguientes comandos:
+2. Actualizaremos el servidor e instalamos todos los paquetes necesarios para instalar el nodo. Para ello ejecutaremos los siguientes comandos:
 
     ```
-    apt-get update && apt-get upgrade -f
+    apt-get update && apt-get -y upgrade && apt-get install -y wget
     ```
 
 3. Crearemos el usuario que correrá el nodo/stake de Energy (no debe ser root):
@@ -62,14 +62,15 @@ Los pasos a seguir una vez tenemos el servidor en marcha y nos hemos conectado p
     ```
     cd $HOME
     rm .bash_history
+    exit
     ```
 
-5. Configuramos el nodo de Energy (seguimos logados como el usuario nrgstaker):
+5. Configuramos el nodo de Energy (logados como root):
 
     1. Establecemos la gestión de los ficheros de LOG. Para ello creamos un nuevo fichero:
 
     ```
-    sudo nano /etc/logrotate.d/energi3
+    nano /etc/logrotate.d/energi3
     ```
 
     y lo rellenamos con el siguiente contenido
@@ -90,7 +91,7 @@ Los pasos a seguir una vez tenemos el servidor en marcha y nos hemos conectado p
     2. Reiniciamos el servidor para activar los cambios:
 
     ```
-    sudo reboot now
+    reboot now
     ```
 
 6. Securizamos el servidor estableciendo las reglas necesarias en el firewal (logados con el usuario root):
@@ -143,3 +144,97 @@ Los pasos a seguir una vez tenemos el servidor en marcha y nos hemos conectado p
     y pulsaremos **ENTER**
 
     ![Nodo sincronizando](./PararPruebaInicial.png)
+
+## Lanzamos el nodo en modo desatendido
+
+Para que el nodo funcione en modo desatendido deberemos logarnos con el usuario nrgstaker y ejecutar el siguiente comando:
+
+```
+screen -dmS Energy energi3 --verbosity 3
+```
+
+De esta manera el nodo se pondrá a trabajar por su cuenta. Para comprobar su funcionamiento podremos excribir:
+
+```
+screen -r
+```
+
+lo cual nos abrirá un terminal virtual donde está corriendo el nodo (como en la imágen):
+
+![Nodo sincronizando](./Screen.png)
+
+Si queremos parar el nodo pulsaremos **CTRL+C** y si queremos dejarlo funcionando por su cuenta pulsaremos **CTRL+A+D**.
+
+## Interactuamos con el nodo
+
+Para poder lanzar comando en el nodo deberemos ejecutar:
+
+```
+energi3 attach
+```
+
+Nos abrirá una consola de comandos donde podremos ejecutar comandos sobre el nodo:
+
+![Consola de comandos](./Consola.png)
+
+Ahora ya podremos crear una cartera, depositar los fondos y empezar a hacer staking:
+
+## Crear la cartera
+
+Dentro de la consola de Energy usaremos el siguiente comando para crear una nueva cartera:
+
+```
+personal.newAccount()
+```
+
+Se nos pedirá que introduzcamos una **Passphrase** o contraseña para la cartera. Esta nos servirá tanto para hacer staking como para manejar los fondos de la cartera.
+
+![Cartera](./CrearCartera.png)
+
+La dirección que obtenemos como resultado será donde deberemos mandar los fondos para realizar el staking.
+
+Podemos crear tantas cuentas como queramos, simplemente repitiendo el comando anterior. Para obtener un listado de todas nuestras cuentas es el siguiente:
+
+```
+personal.listAccounts
+```
+
+![Cartera](./ListaCuentas.png)
+
+## Realizar copia de seguridad de las carteras creadas
+
+Cada vez que creamos una cartera, Energy crea un fichero dentro de la carpeta **\$HOME/.energicore3/keystore** para realizar una copia de ellas simplemente deberemos copiar todos los ficheros de esa carpeta en otro ordenador/almacenamiento externo.
+
+![Cartera](./Backup.png)
+
+## Realizar Staking en nuestro nuevo nodo
+
+Para realizar staking deberemos seguir los siguientes pasos:
+
+1. Depositar fondos en la cartera
+
+    Enviaremos un mínimo de 1 NRG a la dirección de la cartera obtenida en el momento de crearla.
+
+2. Entraremos en la consola de comandos de Energy (deberemos hacerlo desde el usuario nrgstaker)
+
+    ```
+    energi3 attach
+    ```
+
+3. Desbloqueamos la cartera para stacking:
+
+    ```
+    personal.unlockAccount('DIRECCION_GENERADA', null, 0, true)
+    ```
+
+    Deberemos introducir la contraseña usada para crear la cartera.
+
+    ![Cartera](./Backup.png)
+
+4. Comprobamos si está funcionando el staking (al menos debemos tener 1NRG en esa dirección)
+
+    ```
+    miner.stakingStatus()
+    ```
+
+    ![Staking](./StakingStatus.png)
