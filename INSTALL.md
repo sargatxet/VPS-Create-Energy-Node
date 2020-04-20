@@ -6,7 +6,7 @@ Lo primero que deberemos hacer es establecer la configuración del servidor. Nos
 
 Los pasos a seguir una vez tenemos el servidor en marcha y nos hemos conectado por SSH serán los siguientes:
 
-1. No logaremos como el usuario root:
+1. Nos logueamos como el usuario root:
 
     ```
     sudo su -
@@ -15,7 +15,7 @@ Los pasos a seguir una vez tenemos el servidor en marcha y nos hemos conectado p
 2. Actualizaremos el servidor e instalamos todos los paquetes necesarios para instalar el nodo. Para ello ejecutaremos los siguientes comandos:
 
     ```
-    apt-get update && apt-get -y upgrade && apt-get install -y wget
+    apt-get update && apt-get -y upgrade && apt-get install -y wget screen
     ```
 
 3. Crearemos el usuario que correrá el nodo/stake de Energy (no debe ser root):
@@ -36,7 +36,7 @@ Los pasos a seguir una vez tenemos el servidor en marcha y nos hemos conectado p
 
 4. Configuramos el usuario nuevo para que corra el nodo/stake de Energy:
 
-    - Nos logamos con el usuario nuevo
+    - Nos logueamos con el usuario nuevo
 
     ```
     su - nrgstaker
