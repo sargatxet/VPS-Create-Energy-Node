@@ -10,8 +10,8 @@ curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compo
 
 chmod +x /usr/local/bin/docker-compose
 
-wget https://github.com/sargatxet/VPS-Create-Energy-Node/blob/master/energi3/Dockerfile
+wget https://raw.githubusercontent.com/sargatxet/VPS-Create-Energy-Node/blob/master/energi3/Dockerfile
 
-wget https://github.com/sargatxet/VPS-Create-Energy-Node/blob/master/energi3/docker-compose.yaml
+wget https://raw.githubusercontent.com/sargatxet/VPS-Create-Energy-Node/blob/master/energi3/docker-compose.yaml
 
 docker-compose up -d
