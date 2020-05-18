@@ -13,8 +13,8 @@ chmod +x /usr/local/bin/docker-compose
 mkdir $HOME/tmp
 cd $HOME/tmp
 
-curl -L "https://github.com/sargatxet/VPS-Create-Energy-Node/blob/master/energi3/Dockerfile" -o Dockerfile
+curl -fsSL "https://raw.githubusercontent.com/sargatxet/VPS-Create-Energy-Node/master/energi3/Dockerfile" -o Dockerfile
 
-curl -L "https://github.com/sargatxet/VPS-Create-Energy-Node/blob/master/energi3/docker-compose.yaml" -o docker-compose.yaml
+curl -fsSL "https://raw.githubusercontent.com/sargatxet/VPS-Create-Energy-Node/master/energi3/docker-compose.yaml" -o docker-compose.yaml
 
 docker-compose up -d
