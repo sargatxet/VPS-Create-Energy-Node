@@ -13,6 +13,6 @@ RUN set -ex \
     && mkdir -p energi3/js \
     && mkdir -p .energicore3/keystore
 
-COPY ./wallets/* /root/.energicore3/keystore/.
+#COPY ./wallets/* /root/.energicore3/keystore/.
 
 WORKDIR /root
