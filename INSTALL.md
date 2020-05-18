@@ -229,7 +229,7 @@ Para realizar staking deberemos seguir los siguientes pasos:
 
     Deberemos introducir la contraseña usada para crear la cartera.
 
-    ![Cartera](./Backup.png)
+    ![Cartera](./UnlockCartera.png)
 
 4. Comprobamos si está funcionando el staking (al menos debemos tener 1NRG en esa dirección)
 

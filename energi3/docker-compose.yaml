@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    energi3:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        volumes:
+            - data:/root/.energicore3
+        ports:
+            - '39797:39797'
+        command: '/root/energi3/bin/energi3 --verbosity 3'
+
+volumes:
+    data:
