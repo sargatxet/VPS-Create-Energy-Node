@@ -10,8 +10,8 @@ curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compo
 
 chmod +x /usr/local/bin/docker-compose
 
-mkdir $HOME/tmp
-cd $HOME/tmp
+mkdir $HOME/staking
+cd $HOME/staking
 
 curl -fsSL "https://raw.githubusercontent.com/sargatxet/VPS-Create-Energy-Node/master/energi3/Dockerfile" -o Dockerfile
 
